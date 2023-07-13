@@ -1,9 +1,18 @@
 {
-  "name": "project-s",
-  "version": "0.0.1",
-  "description": "",
+  "private": true,
   "scripts": {
-    "dev": "exit not implemented"
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
-  "author": "Fractal-Tess"
+  "devDependencies": {
+    "@turbo/gen": "^1.9.7",
+    "eslint": "^7.32.0",
+    "eslint-config-custom": "workspace:*",
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "packageManager": "pnpm@7.15.0",
+  "name": "project-s"
 }
