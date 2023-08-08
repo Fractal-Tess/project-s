@@ -1,5 +1,6 @@
 {
-  "private": true,
+  "name": "project-s",
+  "version": "0.1.0",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
@@ -9,10 +10,14 @@
   "devDependencies": {
     "@turbo/gen": "^1.9.7",
     "eslint": "^7.32.0",
-    "eslint-config-custom": "workspace:*",
     "prettier": "^2.5.1",
-    "turbo": "latest"
+    "turbo": "1.10.12"
   },
-  "packageManager": "pnpm@7.15.0",
-  "name": "project-s"
+  "engineStrict": true,
+  "engines": {
+    "node": ">18.0.0 < 19.0.0",
+    "pnpm":">8.6.0 <9.0.0"
+  },
+  "packageManager": "pnpm@8.6.11"
+  
 }
