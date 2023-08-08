@@ -5,11 +5,13 @@
   "types": "./index.tsx",
   "main": "./index.tsx",
   "scripts": {
-    "ui:add": "pnpm dlx shadcn-ui@latest add"
+    "ui:add": "pnpm dlx shadcn-ui@latest add",
+    "postui:add": "ts-node --esm ./scripts/generateIndex.mts"
   },
   "devDependencies": {
     "@fontsource/roboto": "^5.0.8",
     "@radix-ui/react-slot": "^1.0.2",
+    "@types/node": "^17.0.45",
     "@types/react": "^18.2.19",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.14",
@@ -22,7 +24,13 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6",
+    "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
     "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.1.2",
+    "@radix-ui/react-alert-dialog": "^1.0.4",
+    "@radix-ui/react-tooltip": "^1.0.6"
   }
 }
