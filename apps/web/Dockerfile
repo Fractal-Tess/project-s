@@ -16,14 +16,13 @@ FROM node:18.14.2-alpine AS base
     WORKDIR /app
 
     RUN corepack enable
-    # RUN corepack prepare pnpm@7.4.1 --activate 
+    RUN corepack prepare pnpm@8.6.11 --activate 
     RUN pnpm add -g turbo
     COPY . .
     RUN turbo prune --scope=web --docker
 
 
 
-# Add lockfile and package.json's of isolated subworkspace
 FROM base AS installer
 
     RUN apk add --no-cache libc6-compat
@@ -32,7 +31,6 @@ FROM base AS installer
 
     RUN corepack enable
 
-    # First install the dependencies (as they change less often)
     COPY .gitignore .gitignore
     COPY --from=builder /app/out/json/ .
     COPY --from=builder /app/out/pnpm-lock.yaml ./pnpm-lock.yaml
@@ -42,7 +40,6 @@ FROM base AS installer
     COPY --from=builder /app/out/full/ .
     COPY turbo.json turbo.json
 
-    # Uncomment and use build args to enable remote caching
     # ARG TURBO_TEAM
     # ENV TURBO_TEAM=$TURBO_TEAM
 
@@ -58,9 +55,6 @@ FROM base AS runner
     RUN addgroup --system --gid 1001 nodejs
     RUN adduser --system --uid 1001 nextjs
     USER nextjs
-
-    # COPY --from=installer /app/apps/web/next.config.js .
-    # COPY --from=installer /app/apps/web/package.json .
 
     # Automatically leverage output traces to reduce image size
     # https://nextjs.org/docs/advanced-features/output-file-tracing
