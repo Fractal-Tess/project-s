@@ -1,7 +1,14 @@
+const path = require('node:path');
+
 /** @type {import('next').NextConfig} */
-const config  = {
+const config = {
   reactStrictMode: true,
-  transpilePackages: ["ui"],
+  output: 'standalone',
+  transpilePackages: ['ui'],
+
+  experimental: {
+    outputFileTracingRoot: path.join(__dirname, '../../'),
+  },
 };
 
-module.exports = config
+module.exports = config;
