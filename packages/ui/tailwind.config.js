@@ -3,7 +3,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ['class'],
-  content: ['../../packages/ui/components/**.{ts,tsx}', 'app/**/*.{ts,tsx}'],
+  content: ['../../packages/ui/components/**/*.{ts,tsx}', 'app/**/*.{ts,tsx}'],
   theme: {
     container: {
       center: true,
