@@ -15,6 +15,7 @@
     "resolveJsonModule": true,
     "strict": false,
     "target": "es5",
+    "baseUrl": ".",
     "paths": {
       "@/*": ["./*"],
       "@ui/*": ["../../packages/ui/*"]
