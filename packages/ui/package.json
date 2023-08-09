@@ -2,8 +2,11 @@
   "name": "ui",
   "license": "MIT",
   "version": "0.1.0",
+  "types": "./index.tsx",
+  "main": "./index.tsx",
   "scripts": {
-    "ui:add": "pnpm dlx shadcn-ui@latest add"
+    "ui:add": "pnpm dlx shadcn-ui@latest add",
+    "postui:add":"ts-node --esm ./scripts/generateIndex.mts"
   },
   "devDependencies": {
     "@fontsource/roboto": "^5.0.8",
@@ -21,6 +24,7 @@
     "tailwind-merge": "^1.14.0",
     "tailwindcss": "^3.3.3",
     "tailwindcss-animate": "^1.0.6",
+    "ts-node": "^10.9.1",
     "tsconfig": "workspace:*",
     "typescript": "^5.1.6"
   },
