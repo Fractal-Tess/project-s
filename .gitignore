@@ -132,3 +132,5 @@ dist
 # Turbo
 .turbo
 
+# Rust/Tauri
+**/target
