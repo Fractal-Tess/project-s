@@ -65,5 +65,6 @@ FROM base AS runner
     EXPOSE 3000  
     
     ENV NEXT_TELEMETRY_DISABLED 1
+    ENV HOSTNAME=0.0.0.0
 
     CMD ["node", "apps/web/server.js"]
