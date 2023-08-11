@@ -134,3 +134,6 @@ dist
 
 # Rust/Tauri
 **/target
+
+# Generic build dir
+build
