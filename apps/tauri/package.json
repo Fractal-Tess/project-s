@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "devDependencies": {
+    "@hookform/resolvers": "^3.2.0",
     "@tauri-apps/api": "^1.4.0",
     "@tauri-apps/cli": "^1.4.0",
     "@types/react": "^18.2.15",
@@ -19,9 +20,11 @@
     "postcss": "^8.4.27",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.45.4",
     "tailwindcss": "^3.3.3",
     "typescript": "^5.0.2",
     "ui": "workspace:*",
-    "vite": "^4.4.4"
+    "vite": "^4.4.4",
+    "zod": "^3.21.4"
   }
 }
