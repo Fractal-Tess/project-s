@@ -13,3 +13,7 @@
     @apply outline outline-1 outline-accent;
   }
 }
+
+#root {
+  @apply min-h-screen form-control;
+}
