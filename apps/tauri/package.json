@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "tauri": "tauri"
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "vite:dev": "vite dev",
+    "vite:build": "tsc && vite build"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.2.0",
