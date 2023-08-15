@@ -42,7 +42,7 @@ module.exports = {
           error: '#ec223d',
         },
         dark: {
-          ...require('daisyui/src/theming/themes')['[data-theme=black]'],
+          ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
           primary: '#45B1E8',
           secondary: '#fbbf24',
           error: '#ec223d',
