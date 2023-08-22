@@ -1,5 +1,12 @@
 import 'ui/styles.css';
 
+import Footer from './Footer';
+import Header from '~/components/Header';
+import type { Metadata } from 'next';
+import NextAuthProvider from '~/context/AuthProvider';
+
+export const metadata: Metadata = {};
+
 export default function RootLayout({
   children,
 }: {
@@ -11,7 +18,11 @@ export default function RootLayout({
         suppressHydrationWarning={true}
         className="bg-base-100 text-base-content min-h-screen"
       >
-        {children}
+        <NextAuthProvider>
+          <Header />
+          {children}
+          <Footer />
+        </NextAuthProvider>
       </body>
     </html>
   );
