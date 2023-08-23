@@ -29,14 +29,19 @@ export const authOptions: NextAuthOptions = {
   //   verifyRequest: 'verify-request',
   //   newUser: '/',
   // },
+  session: {
+    strategy: 'jwt',
+  },
   callbacks: {
-    session: ({ session, token }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: token.sub,
-      },
-    }),
+    session: ({ session, token }) => {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.sub,
+        },
+      };
+    },
   },
   providers: [
     CredentialsProvider({

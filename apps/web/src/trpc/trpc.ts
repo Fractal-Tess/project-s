@@ -9,18 +9,12 @@ type CreateContextOptions = {
   session: Session | null;
 };
 
-const createInnerTRPCContext = ({ session }: CreateContextOptions) => {
-  return {
-    session,
-  };
-};
-
 export const createTRPCContext = async () => {
   const session = await getServerAuthSession();
 
-  return createInnerTRPCContext({
+  return {
     session,
-  });
+  };
 };
 
 const t = initTRPC.context<typeof createTRPCContext>().create({
