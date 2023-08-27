@@ -1,8 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 const config = require('ui/tailwind.config');
 
-// Can modify config here.
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   ...config,
-  content: ['./app/**/*.{jsx,ts}', ...config.content],
+  content: ['src/**/*.{tsx,ts}', ...config.content],
 };
