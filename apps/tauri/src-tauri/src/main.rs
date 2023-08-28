@@ -4,20 +4,16 @@
 )]
 
 use commands::register_command_handlers;
-use state::register_managed_state;
 use tauri::{Builder as TauriBuilder, RunEvent};
 
 mod commands;
 mod error;
 mod prelude;
-mod state;
 
 fn main() {
     let app = TauriBuilder::default().plugin(tauri_plugin_window_state::Builder::default().build());
 
     let app = register_command_handlers(app);
-
-    let app = register_managed_state(app);
 
     app.build(tauri::generate_context!())
         .expect("error while running tauri application")

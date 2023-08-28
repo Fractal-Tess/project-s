@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "tauri dev",
     "build": "tauri build",
+    "drizzle:generate": "drizzle-kit generate:sqlite",
     "vite:dev": "vite dev",
     "vite:build": "tsc && vite build"
   },

@@ -1,8 +1,7 @@
-import config from 'ui/tailwind.config';
+const config = require('ui/tailwind.config.cjs');
 
-console.log(config.daisyui);
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   ...config,
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}', ...config.content],
 };
