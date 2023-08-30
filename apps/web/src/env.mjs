@@ -1,5 +1,7 @@
 import { createEnv } from '@t3-oss/env-nextjs';
 import { z } from 'zod';
+import { config } from 'dotenv';
+config({ override: true });
 
 export const env = createEnv({
   /**
@@ -7,7 +9,7 @@ export const env = createEnv({
    * isn't built with invalid env vars.
    */
   server: {
-    NODE_ENV: z.enum(['development', 'test', 'production']),
+    NODE_ENV: z.enum(['development', 'production']),
     NEXTAUTH_SECRET:
       process.env.NODE_ENV === 'production'
         ? z.string().min(1)
@@ -19,6 +21,7 @@ export const env = createEnv({
       // VERCEL_URL doesn't include `https` so it cant be validated as a URL
       process.env.VERCEL ? z.string().min(1) : z.string().url()
     ),
+    SQLITE_URL: z.string().min(1),
   },
 
   /**
@@ -28,7 +31,6 @@ export const env = createEnv({
    */
   client: {
     NEXT_PUBLIC_ORIGIN: z.string().url(),
-    // NEXT_PUBLIC_CLIENTVAR: z.string().min(1),
   },
 
   /**
@@ -39,8 +41,8 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
     NEXT_PUBLIC_ORIGIN: process.env.NEXT_PUBLIC_ORIGIN,
+    SQLITE_URL: process.env.SQLITE_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
