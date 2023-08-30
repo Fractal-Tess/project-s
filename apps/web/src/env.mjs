@@ -22,6 +22,10 @@ export const env = createEnv({
       process.env.VERCEL ? z.string().min(1) : z.string().url()
     ),
     SQLITE_URL: z.string().min(1),
+
+    ENABLE_NEW_USER_REGISTER: z
+      .enum(['true', 'false'])
+      .transform((arg) => arg === 'true'),
   },
 
   /**
@@ -43,6 +47,7 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_ORIGIN: process.env.NEXT_PUBLIC_ORIGIN,
     SQLITE_URL: process.env.SQLITE_URL,
+    ENABLE_NEW_USER_REGISTER: process.env.ENABLE_NEW_USER_REGISTER,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation.
