@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const config = require('ui/tailwind.config');
+const config = require('ui/tailwind.config.cjs');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
