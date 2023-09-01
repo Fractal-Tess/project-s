@@ -1,4 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
+const heropatterns = require('tailwindcss-hero-patterns/src/patterns');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -11,6 +12,10 @@ module.exports = {
       screens: {
         '2xl': '1400px',
       },
+    },
+    heroPatternsOpacities: ['10'],
+    heroPatterns: {
+      topography: heropatterns.topography,
     },
     extend: {
       fontFamily: {
@@ -58,5 +63,9 @@ module.exports = {
     prefix: '', // prefix for daisyUI classnames (components, modifiers and responsive class names. Not colors)
     logs: true, // Shows info about daisyUI version and used config in the console when building your CSS
   },
-  plugins: [require('tailwindcss-animate'), require('daisyui')],
+  plugins: [
+    require('tailwindcss-animate'),
+    require('daisyui'),
+    require('tailwindcss-hero-patterns'),
+  ],
 };
