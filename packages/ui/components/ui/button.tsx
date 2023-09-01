@@ -8,7 +8,7 @@ const buttonVariants = cva(`btn`, {
     variant: {
       default: '',
       'black-white':
-        'text-white bg-black hover:bg-black/90 dark:text-black dark:bg-white dark:hover:bg-white/90',
+        'text-white  bg-black !border-transparent hover:!border-base-content !border-[1px] transition-colors duration-300  hover:bg-black/90 dark:text-black dark:bg-white dark:hover:bg-white/90',
       secondary: 'btn-secondary',
       accent: 'btn-accent',
       destructive: 'btn-error',
