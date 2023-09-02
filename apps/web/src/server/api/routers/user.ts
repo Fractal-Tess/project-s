@@ -1,6 +1,9 @@
 import { publicProcedure, createTRPCRouter } from '@/server/api/trpc';
 import { hash, genSalt } from 'bcrypt';
-import { userValidator } from '@/validators/user';
+import {
+  registerFormValidator,
+  resetPasswordValidator,
+} from '@/validators/user';
 import { env } from '@/env.mjs';
 import type { z } from 'zod';
 import { TRPCError } from '@trpc/server';
@@ -8,10 +11,20 @@ import { eq, or } from 'drizzle-orm';
 import { user as userSchema } from '@/drizzle/schema';
 import { randomBytes } from 'node:crypto';
 
-type res =
+type RegisterResult =
   | {
       err: {
-        cause: keyof z.infer<typeof userValidator>;
+        cause: keyof z.infer<typeof registerFormValidator>;
+        message: string;
+      };
+      success: false;
+    }
+  | { success: true };
+
+type ResetPasswordResult =
+  | {
+      err: {
+        cause: keyof z.infer<typeof resetPasswordValidator>;
         message: string;
       };
       success: false;
@@ -20,8 +33,8 @@ type res =
 
 export const user = createTRPCRouter({
   register: publicProcedure
-    .input(userValidator)
-    .mutation(async ({ input, ctx }): Promise<res> => {
+    .input(registerFormValidator)
+    .mutation(async ({ input, ctx }): Promise<RegisterResult> => {
       if (!env.ENABLE_NEW_USER_REGISTER) {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -67,5 +80,36 @@ export const user = createTRPCRouter({
       });
 
       return { success: true };
+    }),
+  resetPassword: publicProcedure
+    .input(resetPasswordValidator)
+    .mutation(async ({ ctx, input }): Promise<ResetPasswordResult> => {
+      const user = await ctx.db.query.user.findFirst({
+        where: eq(userSchema.email, input.email),
+      });
+
+      if (!user) {
+        return {
+          success: false,
+          err: {
+            cause: 'email',
+            message: 'Invalid email',
+          },
+        };
+      }
+
+      const token = randomBytes(32).toString('hex');
+      // Expires in 15m
+      const passwordResetTokenValidUntil = new Date(
+        new Date().getTime() + 15 * 60 * 1000
+      );
+      await ctx.db.update(userSchema).set({
+        passwordResetToken: token,
+        passwordResetTokenValidUntil,
+      });
+
+      return {
+        success: true,
+      };
     }),
 });

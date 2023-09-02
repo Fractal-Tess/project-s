@@ -11,4 +11,8 @@ export const user = sqliteTable('user', {
     length: 64,
   }),
   emailConfirmed: int('emailConfirmed', { mode: 'boolean' }).default(false),
+  passwordResetToken: text('passwordResetToken', { length: 64 }),
+  passwordResetTokenValidUntil: int('passwordResetTokenValidUntil', {
+    mode: 'timestamp',
+  }),
 });

@@ -4,6 +4,7 @@ import {
   Button,
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -14,27 +15,25 @@ import { api } from '@/utils/api';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { userValidator } from '@/validators/user';
+import { loginFormValidator } from '@/validators/user';
+import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 export function UserAuthForm() {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const register = api.user.register.useMutation();
 
-  const form = useForm<z.infer<typeof userValidator>>({
-    resolver: zodResolver(userValidator),
+  const form = useForm<z.infer<typeof loginFormValidator>>({
+    resolver: zodResolver(loginFormValidator),
     defaultValues: {
       email: '',
-      username: '',
       password: '',
     },
   });
 
-  async function onSubmit(values: z.infer<typeof userValidator>) {
+  async function onSubmit(values: z.infer<typeof loginFormValidator>) {
     setIsLoading(true);
-    const res = await register.mutateAsync(values);
-    if (!res.success) {
-      form.setError(res.err.cause, { message: res.err.message });
-    }
+    signIn('credentials', {});
 
     setIsLoading(false);
   }
@@ -44,6 +43,7 @@ export function UserAuthForm() {
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           {/* { form.formState.errors.} */}
+
           <FormField
             control={form.control}
             name="email"
@@ -51,24 +51,7 @@ export function UserAuthForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    type="email"
-                    placeholder="example@gmail.com"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="username"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Username</FormLabel>
-                <FormControl>
-                  <Input type="text" placeholder="username" {...field}></Input>
+                  <Input type="email" {...field}></Input>
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -81,8 +64,13 @@ export function UserAuthForm() {
               <FormItem>
                 <FormLabel>Password</FormLabel>
                 <FormControl>
-                  <Input type="password" placeholder="****" {...field}></Input>
+                  <Input type="password" {...field}></Input>
                 </FormControl>
+                <FormDescription>
+                  <Link href="/auth/reset-password" className="link">
+                    Forgot password?
+                  </Link>
+                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
